@@ -1,0 +1,626 @@
+%TAG ! tag:flow.stylus.cadence.com,0.1:
+---
+#############################################################################################
+# Flow  Setup
+#############################################################################################
+# Generated using: Flowkit v20.10-p029_1
+# Command: write_flow_template -type stylus -tools {innovus tempus quantus} -enable_feature {sta_dmmmc sta_eco sta_glitch sta_use_setup_yaml report_ipba report_inline}
+
+# Provide a memorable comment to describe this yaml file
+remarks:
+# level shifters nets given high weight
+# chantop_wrap release 14
+# new constraints added
+# ucru bounded on top
+# latency update false
+# M2 non-pref
+# Directory root of the flow scripts, can be used with file join to normalize paths to flow files.
+# Relative paths are normalized in context of the current file's location
+init_flow_directory: .
+
+# Specify scripts that will be automatically sourced in all tools
+#   these scripts will be run every time each tool initializes
+include_scripts: kick_off.tcl
+
+# Specify scripts that define procs
+#   these are available during flow_step execution
+include_procs:
+
+#############################################################################################
+# Feature Definition
+#############################################################################################
+# +---------------------+---------------------------------------------------------------------------+----------+---------+-------+
+# | Feature             | Description                                                               | Value    | Default | Valid |
+# +---------------------+---------------------------------------------------------------------------+----------+---------+-------+
+# | -dynamic_view       | single dynamic analysis_view to activate                                  |          |         |       |
+# | -hold_views         | list of hold analysis_views to activate                                   |          |         |       |
+# | -leakage_view       | single leakage analysis_view to activate                                  |          |         |       |
+# --- the following features are mutually exclusive (report_style group)
+# | -report_inline      | Run report generation as part of parent flow versus schedule_flow         | enabled  |         | 0 1 {} |
+# ---
+# | -report_ipba        | Enable Infinite PBA analysis and report generation                        | enabled  |         | 0 1 {} |
+# | -setup_views        | list of setup analysis_views to activate                                  |          |         |       |
+# | -sta_dmmmc          | Use distributed MMMC architecture for running STA runs                    | enabled  |         | 0 1 {} |
+# | -sta_eco            | Run opt_signoff during signoff flow                                       | enabled  |         | 0 1 {} |
+# | -sta_glitch         | Add glitch analysis reports to STA flow                                   | enabled  |         | 0 1 {} |
+# | -sta_use_setup_yaml | Use MMMC and power_intent from setup.yaml over those exported via Innovus | enabled  |         | 0 1 {} |
+# +---------------------+---------------------------------------------------------------------------+----------+---------+-------+
+define_feature:
+  setup_views:
+    description: list of setup analysis_views to activate
+    type: string
+    required: 0
+  hold_views:
+    description: list of hold analysis_views to activate
+    type: string
+    required: 0
+  dynamic_view:
+    description: single dynamic analysis_view to activate
+    type: string
+    required: 0
+  leakage_view:
+    description: single leakage analysis_view to activate
+    type: string
+    required: 0
+
+# Optional features in the above table can enabled below by adding them as space separated options
+#   eg: features: -report_inline -report_lec
+features:
+
+#############################################################################################
+# Flow Step Definitions
+#
+# default_flow_steps : Flow steps that come from the tool templates (write_flow_template)
+#                       DO NOT MODIFY
+# tech_flow_steps    : Technology dependent flow steps that are required to place, route and
+#                       optimize a DRC clean design
+# ip_flow_steps      : Flow steps for integrating IP
+# user_flow_steps    : Flow steps which require user modifications to replace PLACEHOLDER
+#                       content and fine tune the flow for specific needs
+#
+#############################################################################################
+default_flow_steps:
+  - flow/common_flows.tcl
+  - flow/common_steps.tcl
+  - flow/innovus_steps.tcl
+  - flow/tempus_steps.tcl
+
+tech_flow_steps:
+
+ip_flow_steps:
+
+user_flow_steps:
+  - design_config.tcl
+  - eco_config.tcl
+  - flow_config.tcl
+  - innovus_config.tcl
+  - tempus_config.tcl
+  - meth_flow_config.tcl
+  - user_flow_config.tcl
+
+# Specify the flows that will be run, in order
+flow_current: implementation
+
+#############################################################################################
+# General Flow Configuration
+#############################################################################################
+
+# Identify the simple design data yaml file to be used
+design_yaml:
+  - setup.yaml
+  - user_setup_sulp.yaml
+
+#############################################################################################
+# Flow Definitions
+#
+#  Common modifications are:
+#    1. comment out a step by adding in a '#', eg  #  - step_does_not_run:
+#    2. delete a line to remove the step
+#    3. reorder defined flow_steps and flows
+#    4. add a single command inline,           eg # CMD_<step_name>: <cmd>
+#    5. add file contents inline,              eg # FILE_<step_name>: <filename>
+#    6. change the parameters, see the comment at the end of each line
+#############################################################################################
+flows:
+
+#-------------------------------------------------------------------------------
+# implementation
+#-------------------------------------------------------------------------------
+  implementation:
+    args: -tool innovus -owner cadence -skip_metric -tool_options "-disable_user_startup -cpus 16 -lic_multi_cpu invs_cpu"
+    features: -setup_views "func_ss_0p99_m40_cw func_ss_0p99_125_cw test_ss_0p99_m40_rcw" -hold_views "func_ff_1p21_m40_cb func_ff_1p21_125_cb test_ff_1p21_m40_rcb"
+    steps:
+      - floorplan:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_design:
+                args: -owner cadence
+                features:
+                steps:
+                  - read_mmmc:
+                  - read_physical:
+                  - read_netlist:
+                  - read_power_intent:
+                  - run_init_design:
+            - init_innovus:
+            - set_dont_use:
+            - CMD_preserve: source inputs/sdc300_chip_g2i.preserve.tcl
+            - init_floorplan:
+            - add_tracks:
+            - outputs_dump:
+            - block_finish:
+            - report_floorplan:
+                args: -owner cadence
+                features:
+                steps:
+                  - report_start:
+                  - init_innovus:
+#                  - report_check_design:
+                  - report_area_innovus:
+                  - report_addon:
+                  - report_route_drc:
+                  - report_finish:
+
+      - prects:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - CMD_ports_skip_route: set_db ports .net.skip_routing true
+            - add_clock_spec:
+            - add_clock_route_types:
+            - add_1v8_route:
+            - FILE_THANOS: THANOS_set.tcl
+            - commit_route_types:
+            - critical_path_grouping:
+            - FILE_relax_setup: relax_cost_group.tcl
+            - FILE_uncertainty_prects: ../inputs/override_cts_F360_T360.tcl
+            - CMD_place_mid: set_db place_opt_post_place_tcl "scripts/post_place.tcl" 
+            - run_place_opt:
+            - outputs_dump:
+            - block_finish:
+            - report_prects:
+                args: -owner cadence
+                features:
+                steps:
+                  - report_start:
+                  - init_innovus:
+                  - report_check_design:
+                  - report_area_innovus:
+                  - report_late_summary_innovus:
+                  - report_late_paths:
+                  - report_addon:
+                  - report_power_innovus:
+                  - report_finish:
+      - cts:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_cts_settings: cts_setting.tcl
+            - FILE_uncertainty_cts: ../inputs/override_cts_F360_T360.tcl
+            - add_clock_tree:
+            - add_tieoffs:
+            - outputs_dump:
+            - block_finish:
+            - report_postcts:
+      - postcts:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_relax_cg: relax_hold.tcl 
+            - run_opt_postcts_setup:
+            - CMD_DLY_release: set_dont_use {  DLY4_X1M_A7TEHULP_C50 DLY4_X1M_A7TLULP_C50 DLY4_X1M_A7TSULP_C50 } false
+            - run_opt_postcts_hold:
+            - block_finish:
+            - report_postcts:
+      - route:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - skip_1v8_route:
+            - FILE_route_setting: route_settings.tcl
+            - FILE_uncertainty8: ../inputs/override_route_F360_T360.tcl
+            - add_fillers:
+            - run_route:
+            - CMD_run_via_opt: set_db route_design_detail_post_route_swap_via true ; set_db route_design_with_timing_driven false ;route_design -via_opt
+            - CMD_run_wire_opt: set_db route_design_detail_min_slack_for_opt_wire 100 ;set_db route_design_detail_post_route_spread_wire true ; route_design -wire_opt
+            - block_finish:
+            - report_route:
+                args: -owner cadence -tool innovus -tool_options -disable_user_startup
+                features:
+                steps:
+                  - report_start:
+                  - init_innovus:
+#                  - report_check_design:
+#                  - report_area_innovus:
+#                  - report_early_summary_innovus:
+#                  - report_late_summary_innovus:
+#                  - report_clock_timing:
+#                  - report_power_innovus:
+#                  - report_route_drc:
+                  - report_addon:
+#                  - report_route_density:
+                  - report_finish:
+      - postroute:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_i_tempus_settings: tempus_settings.tcl
+            - FILE_postroute_settings: postroute_settings.tcl
+            - run_opt_postroute:
+            - outputs_generation:
+            - block_finish:
+            - report_postroute:
+            - innovus_to_tempus:
+            - innovus_to_quantus:
+            - SCHEDULE_postroute: -flow signoff -no_sync
+      - opt_signoff:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_signoff_setting: signoff_design.tcl
+            - read_parasitics:
+            - run_opt_signoff:
+            - block_finish:
+            - report_postroute:
+            - innovus_to_tempus:
+            - innovus_to_quantus:
+            - SCHEDULE_opt_signoff: -flow signoff -no_sync
+
+
+#-------------------------------------------------------------------------------
+# init_innovus
+#-------------------------------------------------------------------------------
+  init_innovus:
+    args: -owner cadence -tool innovus
+    features:
+    steps:
+      - init_innovus_yaml:
+      - init_innovus_user:
+      - settings_file_dump:
+
+#-------------------------------------------------------------------------------
+# eco
+#-------------------------------------------------------------------------------
+  eco:
+    args: -owner cadence -tool innovus -tool_options -disable_user_startup
+    features:
+    steps:
+      - eco_start:
+      - init_innovus:
+      - init_eco:
+      - run_place_eco:
+      - run_route_eco:
+      - eco_finish:
+      - report_postroute:
+      - innovus_to_tempus:
+      - innovus_to_quantus:
+      - SCHEDULE_eco: -flow signoff -no_sync
+
+#-------------------------------------------------------------------------------
+# report_postcts
+#-------------------------------------------------------------------------------
+  report_postcts:
+    args: -owner cadence -tool innovus -tool_options -disable_user_startup
+    features:
+    steps:
+      - report_start:
+      - init_innovus:
+      - report_check_design:
+      - report_area_innovus:
+      - report_early_summary_innovus:
+      - report_early_paths:
+      - report_late_summary_innovus:
+      - report_late_paths:
+      - report_clock_timing:
+      - report_addon:
+      - report_power_innovus:
+      - report_finish:
+
+#-------------------------------------------------------------------------------
+# report_postroute
+#-------------------------------------------------------------------------------
+  report_postroute:
+    args: -owner cadence -tool innovus -tool_options -disable_user_startup
+    features:
+    steps:
+      - report_start:
+      - init_innovus:
+      - report_check_design:
+      - report_area_innovus:
+      - report_early_summary_innovus:
+      - report_early_paths:
+#      - report_early_summary_ipba:
+#      - report_early_paths_ipba:
+      - report_late_summary_innovus:
+      - report_late_paths:
+#      - report_late_summary_ipba:
+#      - report_late_paths_ipba:
+      - report_clock_timing:
+      - report_power_innovus:
+      - report_custom:
+      - report_route_drc:
+      - report_addon:
+      - report_route_density:
+      - report_finish:
+
+#-------------------------------------------------------------------------------
+# extract
+#-------------------------------------------------------------------------------
+  extract:
+    args: -owner cadence -tool flowtool 
+    features:
+    steps:
+      - run_quantus:
+
+#-------------------------------------------------------------------------------
+# init_tempus
+#-------------------------------------------------------------------------------
+  init_tempus:
+    args: -owner cadence -tool tempus
+    features:
+    steps:
+      - init_tempus_yaml:
+      - init_tempus_user:
+
+#-------------------------------------------------------------------------------
+# sta
+#-------------------------------------------------------------------------------
+  sta:
+    args: -owner cadence -tool tempus -tool_options -disable_user_startup
+    features:
+    steps:
+      - signoff_start:
+      - init_tempus:
+      - settings_file_dump:
+      - read_parasitics:
+      - set_propagated_clocks:
+      - update_timing:
+      - check_timing:
+      - report_late_summary:
+      - report_late_paths:
+      - report_late_summary_ipba:
+#      - report_late_paths_ipba:
+      - report_early_summary:
+      - report_early_paths:
+      - report_early_summary_ipba:
+#      - report_early_paths_ipba:
+      - report_glitch:
+      - write_timing_db:
+      - signoff_finish:
+
+#-------------------------------------------------------------------------------
+# sta_subflows
+#-------------------------------------------------------------------------------
+  sta_subflows:
+    args: -owner cadence -tool flowtool -skip_metric
+    features:
+    steps:
+      - schedule_sta_dmmmc:
+      - schedule_sta_eco:
+
+#-------------------------------------------------------------------------------
+# sta_dmmmc
+#-------------------------------------------------------------------------------
+  sta_dmmmc:
+    args: -owner cadence -tool tempus -tool_options -disable_user_startup
+    features:
+    steps:
+      - signoff_start:
+      - run_dmmmc:
+      - signoff_finish:
+
+#-------------------------------------------------------------------------------
+# sta_eco
+#-------------------------------------------------------------------------------
+  sta_eco:
+    args: -owner cadence -tool tempus -tool_options {-disable_user_startup -eco}
+    features:
+    steps:
+      - signoff_start:
+      - init_tempus:
+      - read_parasitics:
+      - set_propagated_clocks:
+      - run_sta_opt_signoff:
+      - write_eco:
+      - signoff_finish:
+
+#-------------------------------------------------------------------------------
+# signoff
+#-------------------------------------------------------------------------------
+  signoff:
+    args: -owner cadence -tool innovus
+    features:
+    steps:
+      - SCHEDULE_extract: -flow extract -tool_options "-- [list run_mode [get_db extract_rc_qrc_run_mode] directory [get_db flow_spef_directory]]"  -no_db  -include_in_metrics
+
+
+
+
+  prects_guna:
+    args: -owner cadence
+    features:
+    steps:
+      - block_start:
+      - init_innovus:
+      - CMD_i_ports_skip_route: set_db ports .net.skip_routing true
+#      - CMD_i_datatodatcheck: set_db opt_enable_data_to_data_checks true
+      - CMD_i_ioport: set_db place_global_place_io_pins true
+      - CMD_i_set_path_groups: create_basic_path_groups -expanded
+      - CMD_i_settinglatencyas0: set_interactive_constraint_modes func ; set_clock_latency -source 0 {cpu_clk}
+      - add_clock_spec:
+      - add_clock_route_types:
+      - add_1v8_route:
+      - commit_route_types:
+      - CMD_i_timedesign: time_design -pre_place -report_dir debug -report_prefix preplace
+      - run_place_opt:
+      - outputs_dump:
+      - block_finish:
+      - report_prects:
+
+  postcts_setup:
+    args: -owner cadence
+    features:
+    steps:
+      - block_start:
+      - init_innovus:
+      - run_opt_postcts_setup:
+      - block_finish:
+      - report_postcts:
+
+  prects_quick:
+    args: -owner cadence
+    features:
+    steps:
+        - block_start:
+        - init_innovus:
+        - add_clock_spec:
+        - add_clock_route_types:
+        - commit_route_types:
+        - run_quickplace:
+        - outputs_dump:
+        - block_finish:
+        - report_prects:
+  postcts_htree:
+    args: -owner cadence
+    features:
+    steps:
+      - block_start:
+      - init_innovus:
+      - run_opt_postcts_hold:
+      - block_finish:
+      - report_postcts:
+
+  postroute_tempus:
+    args: -owner cadence
+    features:
+    steps:
+      - block_start:
+      - init_innovus:
+      - FILE_tempus_settings: tempus_settings.tcl
+      - run_opt_postroute:
+      - block_finish:
+      - report_postroute:
+
+
+  implementation_si:
+    args: -tool innovus -owner cadence -skip_metric -tool_options -disable_user_startup
+    features: -setup_views "func_ss_0p99_m40_cw func_ss_0p99_125_cw test_ss_0p99_m40_rcw" -hold_views "func_ff_1p21_m40_cb func_ff_1p21_125_cb test_ff_1p21_m40_rcb"
+    steps:
+      - route_si:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - skip_1v8_route:
+            - FILE_i_uncertainty8: 8uncertainty.tcl
+            - add_fillers:
+            - run_route:
+            - block_finish:
+            - report_route:
+      - route_si_wire:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - skip_1v8_route:
+            - FILE_iroute_setting: route_settings.tcl
+            - FILE_iuncertainty8: 8uncertainty.tcl
+            - add_fillers:
+            - run_route:
+            - CMD_irun_via_opt: set_db route_design_detail_post_route_swap_via true ; set_db route_design_with_timing_driven false ;route_design -via_opt
+            - CMD_irun_wire_opt: set_db route_design_detail_min_slack_for_opt_wire 100 ;set_db route_design_detail_post_route_spread_wire true ; route_design -wire_opt
+            - block_finish:
+            - report_route:
+      - postroute_si:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - run_opt_postroute:
+            - outputs_generation:
+            - block_finish:
+            - report_postroute:
+            - innovus_to_tempus:
+            - innovus_to_quantus:
+            - SCHEDULE_postroute: -flow signoff -no_sync
+
+      - ccopt:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_icts_settings: cts_setting.tcl
+            - FILE_iuncertainty_cts: 8uncertainty.tcl
+            - critical_path_grouping:
+            - CMD_ccopt_design: ccopt_design -report_dir debug -report_prefix ccopt
+            - add_tieoffs:
+            - outputs_dump:
+            - block_finish:
+            - report_postcts:
+
+
+
+
+
+      - cts_SULP:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_sulp_cts_settings: cts_setting.tcl
+            - FILE_sulp_uncertainty_cts: ../inputs/override_cts_F360_T360.tcl
+            - add_clock_tree:
+            - add_tieoffs:
+            - outputs_dump:
+            - block_finish:
+            - report_postcts:
+
+      - route_SULP:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - skip_1v8_route:
+            - FILE_SULProute_setting: route_settings.tcl
+            - FILE_SULPuncertainty8: ../inputs/override_route_F360_T360.tcl
+            - add_fillers:
+            - run_route:
+            - CMD_SULPrun_via_opt: set_db route_design_detail_post_route_swap_via true ; set_db route_design_with_timing_driven false ;route_design -via_opt
+            - CMD_SULPrun_wire_opt: set_db route_design_detail_min_slack_for_opt_wire 100 ;set_db route_design_detail_post_route_spread_wire true ; route_design -wire_opt
+            - block_finish:
+            - report_route:
+      - postroute_SULP:
+          args: -owner cadence
+          features:
+          steps:
+            - block_start:
+            - init_innovus:
+            - FILE_SULPi_tempus_settings: tempus_settings.tcl
+            - FILE_SULPpostroute_settings: postroute_settings.tcl
+            - run_opt_postroute:
+            - outputs_generation:
+            - block_finish:
+            - report_postroute:
+            - innovus_to_tempus:
+            - innovus_to_quantus:
+            - SCHEDULE_postroute: -flow signoff -no_sync

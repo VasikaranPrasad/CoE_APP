@@ -1,0 +1,10 @@
+[
+  {
+    "user": "John Doe",
+    "designName": 30,
+    "runName": "john@example.com",
+    "fm": true,
+    "dd": true,
+    "da": true
+  }
+]

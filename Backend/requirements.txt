@@ -1,0 +1,11 @@
+daemon
+Flask
+make
+makefile
+numpy
+pandas
+pymongo
+python-dateutil
+requests
+logging
+flask-cors

@@ -1,0 +1,1133 @@
+{
+  "remarks": null,
+  "init_flow_directory": ".",
+  "include_scripts": "kick_off.tcl",
+  "include_procs": null,
+  "define_feature": {
+    "setup_views": {
+      "description": "list of setup analysis_views to activate",
+      "type": "string",
+      "required": 0
+    },
+    "hold_views": {
+      "description": "list of hold analysis_views to activate",
+      "type": "string",
+      "required": 0
+    },
+    "dynamic_view": {
+      "description": "single dynamic analysis_view to activate",
+      "type": "string",
+      "required": 0
+    },
+    "leakage_view": {
+      "description": "single leakage analysis_view to activate",
+      "type": "string",
+      "required": 0
+    }
+  },
+  "features": null,
+  "default_flow_steps": [
+    "flow/common_flows.tcl",
+    "flow/common_steps.tcl",
+    "flow/innovus_steps.tcl",
+    "flow/tempus_steps.tcl"
+  ],
+  "tech_flow_steps": null,
+  "ip_flow_steps": null,
+  "user_flow_steps": [
+    "design_config.tcl",
+    "eco_config.tcl",
+    "flow_config.tcl",
+    "innovus_config.tcl",
+    "tempus_config.tcl",
+    "meth_flow_config.tcl",
+    "user_flow_config.tcl"
+  ],
+  "flow_current": "implementation",
+  "design_yaml": [
+    "setup.yaml",
+    "user_setup_sulp.yaml"
+  ],
+  "flows": {
+    "implementation": {
+      "args": "-tool innovus -owner cadence -skip_metric -tool_options \"-disable_user_startup -cpus 16 -lic_multi_cpu invs_cpu\"",
+      "features": "-setup_views \"func_ss_0p99_m40_cw func_ss_0p99_125_cw test_ss_0p99_m40_rcw\" -hold_views \"func_ff_1p21_m40_cb func_ff_1p21_125_cb test_ff_1p21_m40_rcb\"",
+      "steps": [
+        {
+          "floorplan": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_design": {
+                  "args": "-owner cadence",
+                  "features": null,
+                  "steps": [
+                    {
+                      "read_mmmc": null
+                    },
+                    {
+                      "read_physical": null
+                    },
+                    {
+                      "read_netlist": null
+                    },
+                    {
+                      "read_power_intent": null
+                    },
+                    {
+                      "run_init_design": null
+                    }
+                  ]
+                }
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "set_dont_use": null
+              },
+              {
+                "CMD_preserve": "source inputs/sdc300_chip_g2i.preserve.tcl"
+              },
+              {
+                "init_floorplan": null
+              },
+              {
+                "add_tracks": null
+              },
+              {
+                "outputs_dump": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_floorplan": {
+                  "args": "-owner cadence",
+                  "features": null,
+                  "steps": [
+                    {
+                      "report_start": null
+                    },
+                    {
+                      "init_innovus": null
+                    },
+                    {
+                      "report_area_innovus": null
+                    },
+                    {
+                      "report_addon": null
+                    },
+                    {
+                      "report_route_drc": null
+                    },
+                    {
+                      "report_finish": null
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "prects": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "CMD_ports_skip_route": "set_db ports .net.skip_routing true"
+              },
+              {
+                "add_clock_spec": null
+              },
+              {
+                "add_clock_route_types": null
+              },
+              {
+                "add_1v8_route": null
+              },
+              {
+                "FILE_THANOS": "THANOS_set.tcl"
+              },
+              {
+                "commit_route_types": null
+              },
+              {
+                "critical_path_grouping": null
+              },
+              {
+                "FILE_relax_setup": "relax_cost_group.tcl"
+              },
+              {
+                "FILE_uncertainty_prects": "../inputs/override_cts_F360_T360.tcl"
+              },
+              {
+                "CMD_place_mid": "set_db place_opt_post_place_tcl \"scripts/post_place.tcl\""
+              },
+              {
+                "run_place_opt": null
+              },
+              {
+                "outputs_dump": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_prects": {
+                  "args": "-owner cadence",
+                  "features": null,
+                  "steps": [
+                    {
+                      "report_start": null
+                    },
+                    {
+                      "init_innovus": null
+                    },
+                    {
+                      "report_check_design": null
+                    },
+                    {
+                      "report_area_innovus": null
+                    },
+                    {
+                      "report_late_summary_innovus": null
+                    },
+                    {
+                      "report_late_paths": null
+                    },
+                    {
+                      "report_addon": null
+                    },
+                    {
+                      "report_power_innovus": null
+                    },
+                    {
+                      "report_finish": null
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "cts": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_cts_settings": "cts_setting.tcl"
+              },
+              {
+                "FILE_uncertainty_cts": "../inputs/override_cts_F360_T360.tcl"
+              },
+              {
+                "add_clock_tree": null
+              },
+              {
+                "add_tieoffs": null
+              },
+              {
+                "outputs_dump": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postcts": null
+              }
+            ]
+          }
+        },
+        {
+          "postcts": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_relax_cg": "relax_hold.tcl"
+              },
+              {
+                "run_opt_postcts_setup": null
+              },
+              {
+                "CMD_DLY_release": "set_dont_use {  DLY4_X1M_A7TEHULP_C50 DLY4_X1M_A7TLULP_C50 DLY4_X1M_A7TSULP_C50 } false"
+              },
+              {
+                "run_opt_postcts_hold": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postcts": null
+              }
+            ]
+          }
+        },
+        {
+          "route": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "skip_1v8_route": null
+              },
+              {
+                "FILE_route_setting": "route_settings.tcl"
+              },
+              {
+                "FILE_uncertainty8": "../inputs/override_route_F360_T360.tcl"
+              },
+              {
+                "add_fillers": null
+              },
+              {
+                "run_route": null
+              },
+              {
+                "CMD_run_via_opt": "set_db route_design_detail_post_route_swap_via true ; set_db route_design_with_timing_driven false ;route_design -via_opt"
+              },
+              {
+                "CMD_run_wire_opt": "set_db route_design_detail_min_slack_for_opt_wire 100 ;set_db route_design_detail_post_route_spread_wire true ; route_design -wire_opt"
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_route": {
+                  "args": "-owner cadence -tool innovus -tool_options -disable_user_startup",
+                  "features": null,
+                  "steps": [
+                    {
+                      "report_start": null
+                    },
+                    {
+                      "init_innovus": null
+                    },
+                    {
+                      "report_addon": null
+                    },
+                    {
+                      "report_finish": null
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "postroute": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_i_tempus_settings": "tempus_settings.tcl"
+              },
+              {
+                "FILE_postroute_settings": "postroute_settings.tcl"
+              },
+              {
+                "run_opt_postroute": null
+              },
+              {
+                "outputs_generation": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postroute": null
+              },
+              {
+                "innovus_to_tempus": null
+              },
+              {
+                "innovus_to_quantus": null
+              },
+              {
+                "SCHEDULE_postroute": "-flow signoff -no_sync"
+              }
+            ]
+          }
+        },
+        {
+          "opt_signoff": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_signoff_setting": "signoff_design.tcl"
+              },
+              {
+                "read_parasitics": null
+              },
+              {
+                "run_opt_signoff": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postroute": null
+              },
+              {
+                "innovus_to_tempus": null
+              },
+              {
+                "innovus_to_quantus": null
+              },
+              {
+                "SCHEDULE_opt_signoff": "-flow signoff -no_sync"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "init_innovus": {
+      "args": "-owner cadence -tool innovus",
+      "features": null,
+      "steps": [
+        {
+          "init_innovus_yaml": null
+        },
+        {
+          "init_innovus_user": null
+        },
+        {
+          "settings_file_dump": null
+        }
+      ]
+    },
+    "eco": {
+      "args": "-owner cadence -tool innovus -tool_options -disable_user_startup",
+      "features": null,
+      "steps": [
+        {
+          "eco_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "init_eco": null
+        },
+        {
+          "run_place_eco": null
+        },
+        {
+          "run_route_eco": null
+        },
+        {
+          "eco_finish": null
+        },
+        {
+          "report_postroute": null
+        },
+        {
+          "innovus_to_tempus": null
+        },
+        {
+          "innovus_to_quantus": null
+        },
+        {
+          "SCHEDULE_eco": "-flow signoff -no_sync"
+        }
+      ]
+    },
+    "report_postcts": {
+      "args": "-owner cadence -tool innovus -tool_options -disable_user_startup",
+      "features": null,
+      "steps": [
+        {
+          "report_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "report_check_design": null
+        },
+        {
+          "report_area_innovus": null
+        },
+        {
+          "report_early_summary_innovus": null
+        },
+        {
+          "report_early_paths": null
+        },
+        {
+          "report_late_summary_innovus": null
+        },
+        {
+          "report_late_paths": null
+        },
+        {
+          "report_clock_timing": null
+        },
+        {
+          "report_addon": null
+        },
+        {
+          "report_power_innovus": null
+        },
+        {
+          "report_finish": null
+        }
+      ]
+    },
+    "report_postroute": {
+      "args": "-owner cadence -tool innovus -tool_options -disable_user_startup",
+      "features": null,
+      "steps": [
+        {
+          "report_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "report_check_design": null
+        },
+        {
+          "report_area_innovus": null
+        },
+        {
+          "report_early_summary_innovus": null
+        },
+        {
+          "report_early_paths": null
+        },
+        {
+          "report_late_summary_innovus": null
+        },
+        {
+          "report_late_paths": null
+        },
+        {
+          "report_clock_timing": null
+        },
+        {
+          "report_power_innovus": null
+        },
+        {
+          "report_custom": null
+        },
+        {
+          "report_route_drc": null
+        },
+        {
+          "report_addon": null
+        },
+        {
+          "report_route_density": null
+        },
+        {
+          "report_finish": null
+        }
+      ]
+    },
+    "extract": {
+      "args": "-owner cadence -tool flowtool",
+      "features": null,
+      "steps": [
+        {
+          "run_quantus": null
+        }
+      ]
+    },
+    "init_tempus": {
+      "args": "-owner cadence -tool tempus",
+      "features": null,
+      "steps": [
+        {
+          "init_tempus_yaml": null
+        },
+        {
+          "init_tempus_user": null
+        }
+      ]
+    },
+    "sta": {
+      "args": "-owner cadence -tool tempus -tool_options -disable_user_startup",
+      "features": null,
+      "steps": [
+        {
+          "signoff_start": null
+        },
+        {
+          "init_tempus": null
+        },
+        {
+          "settings_file_dump": null
+        },
+        {
+          "read_parasitics": null
+        },
+        {
+          "set_propagated_clocks": null
+        },
+        {
+          "update_timing": null
+        },
+        {
+          "check_timing": null
+        },
+        {
+          "report_late_summary": null
+        },
+        {
+          "report_late_paths": null
+        },
+        {
+          "report_late_summary_ipba": null
+        },
+        {
+          "report_early_summary": null
+        },
+        {
+          "report_early_paths": null
+        },
+        {
+          "report_early_summary_ipba": null
+        },
+        {
+          "report_glitch": null
+        },
+        {
+          "write_timing_db": null
+        },
+        {
+          "signoff_finish": null
+        }
+      ]
+    },
+    "sta_subflows": {
+      "args": "-owner cadence -tool flowtool -skip_metric",
+      "features": null,
+      "steps": [
+        {
+          "schedule_sta_dmmmc": null
+        },
+        {
+          "schedule_sta_eco": null
+        }
+      ]
+    },
+    "sta_dmmmc": {
+      "args": "-owner cadence -tool tempus -tool_options -disable_user_startup",
+      "features": null,
+      "steps": [
+        {
+          "signoff_start": null
+        },
+        {
+          "run_dmmmc": null
+        },
+        {
+          "signoff_finish": null
+        }
+      ]
+    },
+    "sta_eco": {
+      "args": "-owner cadence -tool tempus -tool_options {-disable_user_startup -eco}",
+      "features": null,
+      "steps": [
+        {
+          "signoff_start": null
+        },
+        {
+          "init_tempus": null
+        },
+        {
+          "read_parasitics": null
+        },
+        {
+          "set_propagated_clocks": null
+        },
+        {
+          "run_sta_opt_signoff": null
+        },
+        {
+          "write_eco": null
+        },
+        {
+          "signoff_finish": null
+        }
+      ]
+    },
+    "signoff": {
+      "args": "-owner cadence -tool innovus",
+      "features": null,
+      "steps": [
+        {
+          "SCHEDULE_extract": "-flow extract -tool_options \"-- [list run_mode [get_db extract_rc_qrc_run_mode] directory [get_db flow_spef_directory]]\"  -no_db  -include_in_metrics"
+        }
+      ]
+    },
+    "prects_guna": {
+      "args": "-owner cadence",
+      "features": null,
+      "steps": [
+        {
+          "block_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "CMD_i_ports_skip_route": "set_db ports .net.skip_routing true"
+        },
+        {
+          "CMD_i_ioport": "set_db place_global_place_io_pins true"
+        },
+        {
+          "CMD_i_set_path_groups": "create_basic_path_groups -expanded"
+        },
+        {
+          "CMD_i_settinglatencyas0": "set_interactive_constraint_modes func ; set_clock_latency -source 0 {cpu_clk}"
+        },
+        {
+          "add_clock_spec": null
+        },
+        {
+          "add_clock_route_types": null
+        },
+        {
+          "add_1v8_route": null
+        },
+        {
+          "commit_route_types": null
+        },
+        {
+          "CMD_i_timedesign": "time_design -pre_place -report_dir debug -report_prefix preplace"
+        },
+        {
+          "run_place_opt": null
+        },
+        {
+          "outputs_dump": null
+        },
+        {
+          "block_finish": null
+        },
+        {
+          "report_prects": null
+        }
+      ]
+    },
+    "postcts_setup": {
+      "args": "-owner cadence",
+      "features": null,
+      "steps": [
+        {
+          "block_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "run_opt_postcts_setup": null
+        },
+        {
+          "block_finish": null
+        },
+        {
+          "report_postcts": null
+        }
+      ]
+    },
+    "prects_quick": {
+      "args": "-owner cadence",
+      "features": null,
+      "steps": [
+        {
+          "block_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "add_clock_spec": null
+        },
+        {
+          "add_clock_route_types": null
+        },
+        {
+          "commit_route_types": null
+        },
+        {
+          "run_quickplace": null
+        },
+        {
+          "outputs_dump": null
+        },
+        {
+          "block_finish": null
+        },
+        {
+          "report_prects": null
+        }
+      ]
+    },
+    "postcts_htree": {
+      "args": "-owner cadence",
+      "features": null,
+      "steps": [
+        {
+          "block_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "run_opt_postcts_hold": null
+        },
+        {
+          "block_finish": null
+        },
+        {
+          "report_postcts": null
+        }
+      ]
+    },
+    "postroute_tempus": {
+      "args": "-owner cadence",
+      "features": null,
+      "steps": [
+        {
+          "block_start": null
+        },
+        {
+          "init_innovus": null
+        },
+        {
+          "FILE_tempus_settings": "tempus_settings.tcl"
+        },
+        {
+          "run_opt_postroute": null
+        },
+        {
+          "block_finish": null
+        },
+        {
+          "report_postroute": null
+        }
+      ]
+    },
+    "implementation_si": {
+      "args": "-tool innovus -owner cadence -skip_metric -tool_options -disable_user_startup",
+      "features": "-setup_views \"func_ss_0p99_m40_cw func_ss_0p99_125_cw test_ss_0p99_m40_rcw\" -hold_views \"func_ff_1p21_m40_cb func_ff_1p21_125_cb test_ff_1p21_m40_rcb\"",
+      "steps": [
+        {
+          "route_si": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "skip_1v8_route": null
+              },
+              {
+                "FILE_i_uncertainty8": "8uncertainty.tcl"
+              },
+              {
+                "add_fillers": null
+              },
+              {
+                "run_route": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_route": null
+              }
+            ]
+          }
+        },
+        {
+          "route_si_wire": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "skip_1v8_route": null
+              },
+              {
+                "FILE_iroute_setting": "route_settings.tcl"
+              },
+              {
+                "FILE_iuncertainty8": "8uncertainty.tcl"
+              },
+              {
+                "add_fillers": null
+              },
+              {
+                "run_route": null
+              },
+              {
+                "CMD_irun_via_opt": "set_db route_design_detail_post_route_swap_via true ; set_db route_design_with_timing_driven false ;route_design -via_opt"
+              },
+              {
+                "CMD_irun_wire_opt": "set_db route_design_detail_min_slack_for_opt_wire 100 ;set_db route_design_detail_post_route_spread_wire true ; route_design -wire_opt"
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_route": null
+              }
+            ]
+          }
+        },
+        {
+          "postroute_si": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "run_opt_postroute": null
+              },
+              {
+                "outputs_generation": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postroute": null
+              },
+              {
+                "innovus_to_tempus": null
+              },
+              {
+                "innovus_to_quantus": null
+              },
+              {
+                "SCHEDULE_postroute": "-flow signoff -no_sync"
+              }
+            ]
+          }
+        },
+        {
+          "ccopt": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_icts_settings": "cts_setting.tcl"
+              },
+              {
+                "FILE_iuncertainty_cts": "8uncertainty.tcl"
+              },
+              {
+                "critical_path_grouping": null
+              },
+              {
+                "CMD_ccopt_design": "ccopt_design -report_dir debug -report_prefix ccopt"
+              },
+              {
+                "add_tieoffs": null
+              },
+              {
+                "outputs_dump": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postcts": null
+              }
+            ]
+          }
+        },
+        {
+          "cts_SULP": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_sulp_cts_settings": "cts_setting.tcl"
+              },
+              {
+                "FILE_sulp_uncertainty_cts": "../inputs/override_cts_F360_T360.tcl"
+              },
+              {
+                "add_clock_tree": null
+              },
+              {
+                "add_tieoffs": null
+              },
+              {
+                "outputs_dump": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postcts": null
+              }
+            ]
+          }
+        },
+        {
+          "route_SULP": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "skip_1v8_route": null
+              },
+              {
+                "FILE_SULProute_setting": "route_settings.tcl"
+              },
+              {
+                "FILE_SULPuncertainty8": "../inputs/override_route_F360_T360.tcl"
+              },
+              {
+                "add_fillers": null
+              },
+              {
+                "run_route": null
+              },
+              {
+                "CMD_SULPrun_via_opt": "set_db route_design_detail_post_route_swap_via true ; set_db route_design_with_timing_driven false ;route_design -via_opt"
+              },
+              {
+                "CMD_SULPrun_wire_opt": "set_db route_design_detail_min_slack_for_opt_wire 100 ;set_db route_design_detail_post_route_spread_wire true ; route_design -wire_opt"
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_route": null
+              }
+            ]
+          }
+        },
+        {
+          "postroute_SULP": {
+            "args": "-owner cadence",
+            "features": null,
+            "steps": [
+              {
+                "block_start": null
+              },
+              {
+                "init_innovus": null
+              },
+              {
+                "FILE_SULPi_tempus_settings": "tempus_settings.tcl"
+              },
+              {
+                "FILE_SULPpostroute_settings": "postroute_settings.tcl"
+              },
+              {
+                "run_opt_postroute": null
+              },
+              {
+                "outputs_generation": null
+              },
+              {
+                "block_finish": null
+              },
+              {
+                "report_postroute": null
+              },
+              {
+                "innovus_to_tempus": null
+              },
+              {
+                "innovus_to_quantus": null
+              },
+              {
+                "SCHEDULE_postroute": "-flow signoff -no_sync"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

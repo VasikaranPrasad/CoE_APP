@@ -1,0 +1,321 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap");
+
+* {
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+/* Table CSS */
+
+.TableContainer {
+  position: relative;
+  margin: 50px 70px 70px;
+  box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.TableBody {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: white;
+  border: 1px solid #1a2929;
+}
+
+td,
+th {
+  text-align: center;
+
+  padding: 8px;
+
+  border-right: 1px solid #1a2929;
+}
+
+td {
+  font-size: 12px;
+}
+
+thead th {
+  color: #ffffff;
+
+  background: #1a2929;
+}
+
+tr:nth-child(even) {
+  background: #9edfd3;
+}
+
+
+.buttonContainer {
+  display: flex;
+
+  justify-content: space-evenly;
+
+  /* gap: 10px; */
+}
+
+.TableCustomButtonFM.active {
+  background-color: #4caf50;
+
+  color: white;
+
+  padding: 8px 16px;
+
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+
+  /* display: inline-flex; */
+}
+
+td:nth-child(4) {
+  width: 250px;
+}
+
+td:nth-child(5),
+td:nth-child(6) {
+  /* Add your custom styles for the target columns here */
+
+  width: 200px;
+}
+
+.TableCustomButtonFM.disabled {
+  background-color: #4caf50;
+
+  color: white;
+
+  padding: 8px 16px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+
+  opacity: 0.5;
+
+  /* pointer-events: none; */
+
+  cursor: not-allowed;
+
+  /* display: inline-flex; */
+}
+
+.TableCustomButton.active {
+background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  display: inline-flex;
+}
+
+.TableCustomButton.active {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  display: inline-flex;
+
+}
+
+.TableCustomButton:hover {
+  background-color: #45a049;
+}
+
+.TablePagination {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.TablePagination a,
+.TablePagination .active a {
+  color: #000;
+
+  padding: 8px 16px;
+
+  text-decoration: none;
+
+  border: 1px solid #ccc;
+
+  margin: 0 4px;
+
+  cursor: pointer;
+}
+
+.TablePagination li {
+  list-style: none;
+}
+
+.TablePagination .active a {
+  background: #9edfd3;
+}
+
+.TablePagination a:hover:not(.active) {
+  background-color: #f2f2f2;
+}
+
+.TableCustomButton.disabled {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0.5;
+  /* pointer-events: none; */
+  cursor: not-allowed;
+  display: inline-flex;
+}
+
+@media (max-width: 767px) {
+  .TableBody {
+    display: block;
+
+    width: 100%;
+  }
+
+  thead,
+  tbody,
+  thead th {
+    display: block;
+  }
+
+  thead th:last-child {
+    border-bottom: none;
+  }
+
+  thead {
+    float: left;
+  }
+
+  tbody {
+    width: auto;
+
+    position: relative;
+
+    overflow-x: auto;
+  }
+
+  td,
+  th {
+    padding: 20px 0.625em 0.625em 0.625em;
+
+    height: 60px;
+
+    vertical-align: middle;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+
+    overflow-y: auto;
+
+    width: 120px;
+
+    font-size: 13px;
+
+    text-overflow: ellipsis;
+  }
+
+  thead th {
+    text-align: left;
+
+    border-bottom: 1px solid #f7f7f9;
+  }
+
+  tbody tr {
+    display: table-cell;
+  }
+
+  tbody tr:nth-child(odd) {
+    background: none;
+  }
+
+  tr:nth-child(even) {
+    background: transparent;
+  }
+
+  tr td:nth-child(odd) {
+    background: #f8f8f8;
+    border-right: 1px solid #1a2929;
+  }
+
+  tr td:nth-child(even) {
+    background-color: #9edfd3;
+    border-right: 1px solid #1a2929;
+  }
+
+  tbody td {
+    display: block;
+
+    text-align: center;
+  }
+}
+
+/************* dashboardTab/AreaTable.js CSS *************/
+
+.AreabuttonBody {
+  margin-bottom: 20px;
+}
+
+.AreabuttonBody button {
+  margin: 0 15px 0 0;
+}
+
+.selected-tab {
+  background-color: #4caf50;
+
+  color: white;
+
+  padding: 8px 16px;
+
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+
+  display: inline-flex;
+}
+
+.non-selected-tab {
+  background-color: #4caf50;
+
+  color: white;
+
+  padding: 8px 16px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+
+  opacity: 0.7;
+
+  display: inline-flex;
+}

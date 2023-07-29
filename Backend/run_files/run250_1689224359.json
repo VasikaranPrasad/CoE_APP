@@ -1,0 +1,799 @@
+[
+    {
+        "Instance": "u_digtop",
+        "Module": "sdc300_digtop",
+        "Cell_Count": "1088681",
+        "Cell_Area": "4430679.346",
+        "Net_Area": "0.000",
+        "Total_Area": "4430679.346",
+        "Sublevel": [
+            {
+                "Instance": "u_cpu_ss_top",
+                "Module": "sdc300_cpu_ss_top_low_power_retn_mem_low_power_int",
+                "Cell_Count": "409089",
+                "Cell_Area": "2476437.835",
+                "Net_Area": "0.000",
+                "Total_Area": "2476437.835",
+                "Sublevel": [
+                    {
+                        "Instance": "u_crypto_ss",
+                        "Module": "crypto_ss_AXI_MST_ADDR_WIDTH32_AXI_MST_DATA_WIDTH3",
+                        "Cell_Count": "149234",
+                        "Cell_Area": "237367.946",
+                        "Net_Area": "0.000",
+                        "Total_Area": "237367.946",
+                        "Sublevel": [
+                            {
+                                "Instance": "U_TOP",
+                                "Module": "crypto_top_AXI_MST_ADDR_WIDTH32_NUM_AES_ENGINES1_N",
+                                "Cell_Count": "113194",
+                                "Cell_Area": "188324.170",
+                                "Net_Area": "0.000",
+                                "Total_Area": "188324.170",
+                                "Sublevel": [
+                                    {
+                                        "Instance": "AES_INST[0].U_AES_ENGINE",
+                                        "Module": "aes_engine_NUMBER_OF_KEYWORDS4h8_DATA_BUS_WIDTH64_",
+                                        "Cell_Count": "36650",
+                                        "Cell_Area": "64005.319",
+                                        "Net_Area": "0.000",
+                                        "Total_Area": "64005.319",
+                                        "Sublevel": [
+                                            {
+                                                "Instance": "ctxt_out_fifo",
+                                                "Module": "sync_fifo_DATA_WIDTH139_FIFO_DEPTH16_PTR_WIDTH4_1",
+                                                "Cell_Count": "3559",
+                                                "Cell_Area": "9505.510",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "9505.510",
+                                                "Sublevel": []
+                                            },
+                                            {
+                                                "Instance": "decipher",
+                                                "Module": "decipher_block_NUMBER_OF_KEYWORDS4h8_NUMBER_OF_ROU",
+                                                "Cell_Count": "10004",
+                                                "Cell_Area": "8931.269",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "8931.269",
+                                                "Sublevel": [
+                                                    {
+                                                        "Instance": "addroundkey1",
+                                                        "Module": "add_roundkey_1",
+                                                        "Cell_Count": "259",
+                                                        "Cell_Area": "670.692",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "670.692",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "invmixcol1",
+                                                        "Module": "inv_mix_columns",
+                                                        "Cell_Count": "733",
+                                                        "Cell_Area": "964.516",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "964.516",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "genblk1[0].u_colmult_",
+                                                                "Module": "column_mult",
+                                                                "Cell_Count": "184",
+                                                                "Cell_Area": "239.826",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "239.826",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[1].u_colmult_",
+                                                                "Module": "column_mult_1",
+                                                                "Cell_Count": "183",
+                                                                "Cell_Area": "241.501",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "241.501",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[2].u_colmult_",
+                                                                "Module": "column_mult_2",
+                                                                "Cell_Count": "183",
+                                                                "Cell_Area": "241.501",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "241.501",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[3].u_colmult_",
+                                                                "Module": "column_mult_3",
+                                                                "Cell_Count": "183",
+                                                                "Cell_Area": "241.688",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "241.688",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "Instance": "invsubbytes1",
+                                                        "Module": "inv_sub_bytes",
+                                                        "Cell_Count": "7303",
+                                                        "Cell_Area": "5420.282",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "5420.282",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "genblk1[0].genblk1[0].ginvsbox",
+                                                                "Module": "get_invsbox",
+                                                                "Cell_Count": "458",
+                                                                "Cell_Area": "340.001",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "340.001",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[0].genblk1[1].ginvsbox",
+                                                                "Module": "get_invsbox_1",
+                                                                "Cell_Count": "454",
+                                                                "Cell_Area": "339.443",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "339.443",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[0].genblk1[2].ginvsbox",
+                                                                "Module": "get_invsbox_2",
+                                                                "Cell_Count": "450",
+                                                                "Cell_Area": "337.767",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "337.767",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[0].genblk1[3].ginvsbox",
+                                                                "Module": "get_invsbox_3",
+                                                                "Cell_Count": "449",
+                                                                "Cell_Area": "337.581",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "337.581",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[1].genblk1[0].ginvsbox",
+                                                                "Module": "get_invsbox_4",
+                                                                "Cell_Count": "440",
+                                                                "Cell_Area": "334.415",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "334.415",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[1].genblk1[1].ginvsbox",
+                                                                "Module": "get_invsbox_5",
+                                                                "Cell_Count": "444",
+                                                                "Cell_Area": "334.229",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "334.229",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[1].genblk1[2].ginvsbox",
+                                                                "Module": "get_invsbox_6",
+                                                                "Cell_Count": "450",
+                                                                "Cell_Area": "336.650",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "336.650",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[1].genblk1[3].ginvsbox",
+                                                                "Module": "get_invsbox_7",
+                                                                "Cell_Count": "448",
+                                                                "Cell_Area": "334.788",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "334.788",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[2].genblk1[0].ginvsbox",
+                                                                "Module": "get_invsbox_8",
+                                                                "Cell_Count": "461",
+                                                                "Cell_Area": "337.953",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "337.953",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[2].genblk1[1].ginvsbox",
+                                                                "Module": "get_invsbox_9",
+                                                                "Cell_Count": "463",
+                                                                "Cell_Area": "340.932",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "340.932",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[2].genblk1[2].ginvsbox",
+                                                                "Module": "get_invsbox_10",
+                                                                "Cell_Count": "463",
+                                                                "Cell_Area": "340.560",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "340.560",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[2].genblk1[3].ginvsbox",
+                                                                "Module": "get_invsbox_11",
+                                                                "Cell_Count": "461",
+                                                                "Cell_Area": "337.953",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "337.953",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[3].genblk1[0].ginvsbox",
+                                                                "Module": "get_invsbox_12",
+                                                                "Cell_Count": "465",
+                                                                "Cell_Area": "342.236",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "342.236",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[3].genblk1[1].ginvsbox",
+                                                                "Module": "get_invsbox_13",
+                                                                "Cell_Count": "465",
+                                                                "Cell_Area": "341.677",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "341.677",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[3].genblk1[2].ginvsbox",
+                                                                "Module": "get_invsbox_14",
+                                                                "Cell_Count": "465",
+                                                                "Cell_Area": "341.863",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "341.863",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "genblk1[3].genblk1[3].ginvsbox",
+                                                                "Module": "get_invsbox_15",
+                                                                "Cell_Count": "467",
+                                                                "Cell_Area": "342.236",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "342.236",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Instance": "ghash_blk",
+                                                "Module": "aes_ghash",
+                                                "Cell_Count": "38",
+                                                "Cell_Area": "81.369",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "81.369",
+                                                "Sublevel": []
+                                            },
+                                            {
+                                                "Instance": "keyxpand",
+                                                "Module": "key_expand_NUMBER_OF_KEYWORDS4h8_NUMBER_OF_ROUNDS1",
+                                                "Cell_Count": "17492",
+                                                "Cell_Area": "32292.666",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "32292.666",
+                                                "Sublevel": [
+                                                    {
+                                                        "Instance": "nsb00",
+                                                        "Module": "get_sbox_19",
+                                                        "Cell_Count": "447",
+                                                        "Cell_Area": "335.532",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "335.532",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "nsb01",
+                                                        "Module": "get_sbox_1",
+                                                        "Cell_Count": "445",
+                                                        "Cell_Area": "336.650",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "336.650",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "nsb02",
+                                                        "Module": "get_sbox_2",
+                                                        "Cell_Count": "451",
+                                                        "Cell_Area": "336.836",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "336.836",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "nsb03",
+                                                        "Module": "get_sbox_3",
+                                                        "Cell_Count": "452",
+                                                        "Cell_Area": "339.443",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "339.443",
+                                                        "Sublevel": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Instance": "ptxt_in_fifo",
+                                                "Module": "sync_fifo_DATA_WIDTH139_FIFO_DEPTH16_PTR_WIDTH4",
+                                                "Cell_Count": "3536",
+                                                "Cell_Area": "9789.651",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "9789.651",
+                                                "Sublevel": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "Instance": "U_CRYPTO_OUT_INTERFACE",
+                                        "Module": "crypto_aes_engine_out_if_NUM_OF_CHANNEL4_NUM_OF_CH",
+                                        "Cell_Count": "318",
+                                        "Cell_Area": "390.275",
+                                        "Net_Area": "0.000",
+                                        "Total_Area": "390.275",
+                                        "Sublevel": [
+                                            {
+                                                "Instance": "U_ram_wr_arbiter",
+                                                "Module": "crypto_mem_wr_arb_NUM_OF_MST32_LOG_NUM_OF_MST5_1",
+                                                "Cell_Count": "83",
+                                                "Cell_Area": "115.072",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "115.072",
+                                                "Sublevel": [
+                                                    {
+                                                        "Instance": "U_4CH_ARB_THIRD_STAGE",
+                                                        "Module": "crypto_rr_arb_4_ch_43",
+                                                        "Cell_Count": "19",
+                                                        "Cell_Area": "29.420",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "29.420",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "PE_0",
+                                                                "Module": "crypto_priority_encode_172",
+                                                                "Cell_Count": "2",
+                                                                "Cell_Area": "1.303",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "1.303",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_1",
+                                                                "Module": "crypto_priority_encode_173",
+                                                                "Cell_Count": "2",
+                                                                "Cell_Area": "1.303",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "1.303",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_2",
+                                                                "Module": "crypto_priority_encode_174",
+                                                                "Cell_Count": "2",
+                                                                "Cell_Area": "1.303",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "1.303",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_3",
+                                                                "Module": "crypto_priority_encode_175",
+                                                                "Cell_Count": "2",
+                                                                "Cell_Area": "1.303",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "1.303",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "Instance": "genblk1[0].U_4CH_ARB_FIRST_STAGE",
+                                                        "Module": "crypto_rr_arb_4_ch_22",
+                                                        "Cell_Count": "26",
+                                                        "Cell_Area": "35.937",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "35.937",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "PE_0",
+                                                                "Module": "crypto_priority_encode_88",
+                                                                "Cell_Count": "3",
+                                                                "Cell_Area": "2.793",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "2.793",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_1",
+                                                                "Module": "crypto_priority_encode_89",
+                                                                "Cell_Count": "4",
+                                                                "Cell_Area": "3.165",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "3.165",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_2",
+                                                                "Module": "crypto_priority_encode_90",
+                                                                "Cell_Count": "4",
+                                                                "Cell_Area": "3.165",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "3.165",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_3",
+                                                                "Module": "crypto_priority_encode_91",
+                                                                "Cell_Count": "4",
+                                                                "Cell_Area": "3.165",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "3.165",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "Instance": "genblk4[0].U_4CH_ARB_SECOND_STAGE",
+                                                        "Module": "crypto_rr_arb_4_ch_41",
+                                                        "Cell_Count": "12",
+                                                        "Cell_Area": "22.716",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "22.716",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "PE_0",
+                                                                "Module": "crypto_priority_encode",
+                                                                "Cell_Count": "1",
+                                                                "Cell_Area": "0.745",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "0.745",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_1",
+                                                                "Module": "crypto_priority_encode_121",
+                                                                "Cell_Count": "1",
+                                                                "Cell_Area": "0.745",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "0.745",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_2",
+                                                                "Module": "crypto_priority_encode_122",
+                                                                "Cell_Count": "1",
+                                                                "Cell_Area": "0.745",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "0.745",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "PE_3",
+                                                                "Module": "crypto_priority_encode_123",
+                                                                "Cell_Count": "1",
+                                                                "Cell_Area": "0.745",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "0.745",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "Instance": "u_aes_sha_clk_gate",
+                                        "Module": "ss_clk_gate_51",
+                                        "Cell_Count": "2",
+                                        "Cell_Area": "2.979",
+                                        "Net_Area": "0.000",
+                                        "Total_Area": "2.979",
+                                        "Sublevel": []
+                                    },
+                                    {
+                                        "Instance": "U_CH_TO_CONTEXT_MAP",
+                                        "Module": "crypto_ch_to_contex_mapper_NUM_OF_CHANNEL4_NUM_OF_",
+                                        "Cell_Count": "1007",
+                                        "Cell_Area": "2425.814",
+                                        "Net_Area": "0.000",
+                                        "Total_Area": "2425.814",
+                                        "Sublevel": [
+                                            {
+                                                "Instance": "U_BYPASS_QUEUE",
+                                                "Module": "sync_fifo_DATA_WIDTH66_FIFO_DEPTH8_PTR_WIDTH3",
+                                                "Cell_Count": "961",
+                                                "Cell_Area": "2385.781",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "2385.781",
+                                                "Sublevel": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "Instance": "SHA_INST[0].i_sha256",
+                                        "Module": "sha256_sha_in_sha256_sha_in_if_NUM_CNTX8_USER_BITS",
+                                        "Cell_Count": "23242",
+                                        "Cell_Area": "39333.447",
+                                        "Net_Area": "0.000",
+                                        "Total_Area": "39333.447",
+                                        "Sublevel": [
+                                            {
+                                                "Instance": "input_fifo",
+                                                "Module": "sha_sync_fifo_DATA_WIDTH81_ADDR_WIDTH4_RAM_DEPTH16",
+                                                "Cell_Count": "3235",
+                                                "Cell_Area": "5884.851",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "5884.851",
+                                                "Sublevel": []
+                                            },
+                                            {
+                                                "Instance": "output_fifo",
+                                                "Module": "sha_sync_fifo_DATA_WIDTH267_ADDR_WIDTH2_RAM_DEPTH4",
+                                                "Cell_Count": "3001",
+                                                "Cell_Area": "5822.288",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "5822.288",
+                                                "Sublevel": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "Instance": "CH_INST[0].U_channel",
+                                        "Module": "crypto_channel_top_NUM_CONTEXT_PER_ENGINE_WIDTH2_N",
+                                        "Cell_Count": "6230",
+                                        "Cell_Area": "9918.502",
+                                        "Net_Area": "0.000",
+                                        "Total_Area": "9918.502",
+                                        "Sublevel": [
+                                            {
+                                                "Instance": "U_CH_DESC_MANAGER",
+                                                "Module": "crypto_ch_descriptor_manager_AXI_DATA_WIDTH32_AXI_",
+                                                "Cell_Count": "1647",
+                                                "Cell_Area": "3621.962",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "3621.962",
+                                                "Sublevel": [
+                                                    {
+                                                        "Instance": "U_DESC_DST_ADDR_HI",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH4_PTR_",
+                                                        "Cell_Count": "247",
+                                                        "Cell_Area": "612.784",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "612.784",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DESC_DST_ADDR_LO",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH4_PTR_",
+                                                        "Cell_Count": "250",
+                                                        "Cell_Area": "613.529",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "613.529",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DESC_NEXT_DESC_ADDR_HI",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH2_PTR_",
+                                                        "Cell_Count": "127",
+                                                        "Cell_Area": "307.789",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "307.789",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DESC_NEXT_DESC_ADDR_LO",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH2_PTR_",
+                                                        "Cell_Count": "128",
+                                                        "Cell_Area": "307.975",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "307.975",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DESC_SRC_ADDR_HI",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH2_PTR_",
+                                                        "Cell_Count": "128",
+                                                        "Cell_Area": "308.720",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "308.720",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DESC_SRC_ADDR_LO",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH2_PTR_",
+                                                        "Cell_Count": "128",
+                                                        "Cell_Area": "307.975",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "307.975",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DST_LAST_FIFO",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH1_FIFO_DEPTH4_PTR_W",
+                                                        "Cell_Count": "59",
+                                                        "Cell_Area": "76.714",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "76.714",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_DST_XFER_COUNT_FIFO",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH4_PTR_",
+                                                        "Cell_Count": "277",
+                                                        "Cell_Area": "621.349",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "621.349",
+                                                        "Sublevel": []
+                                                    },
+                                                    {
+                                                        "Instance": "U_SRC_XFER_COUNT_FIFO",
+                                                        "Module": "sync_fifo_with_flush_DATA_WIDTH32_FIFO_DEPTH2_PTR_",
+                                                        "Cell_Count": "127",
+                                                        "Cell_Area": "308.161",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "308.161",
+                                                        "Sublevel": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "Instance": "U_CH_REGS",
+                                                "Module": "rf_dmac_ch_regs",
+                                                "Cell_Count": "1113",
+                                                "Cell_Area": "1907.433",
+                                                "Net_Area": "0.000",
+                                                "Total_Area": "1907.433",
+                                                "Sublevel": [
+                                                    {
+                                                        "Instance": "U_reg_CH_CTRL_0",
+                                                        "Module": "reg_CH_CTRL",
+                                                        "Cell_Count": "47",
+                                                        "Cell_Area": "97.010",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "97.010",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "U_fld_ch_cfg",
+                                                                "Module": "reg_sw_rw_WIDTH2_RST_VAL0",
+                                                                "Cell_Count": "6",
+                                                                "Cell_Area": "11.358",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "11.358",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "U_fld_ch_desc_en",
+                                                                "Module": "reg_sw_rw_WIDTH1_RST_VAL0_2",
+                                                                "Cell_Count": "4",
+                                                                "Cell_Area": "6.145",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "6.145",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "U_fld_ch_en",
+                                                                "Module": "reg_sw_rw_WIDTH1_RST_VAL0_1",
+                                                                "Cell_Count": "5",
+                                                                "Cell_Area": "6.889",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "6.889",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "U_fld_crypto_context_id",
+                                                                "Module": "reg_sw_rw_WIDTH4_RST_VAL0",
+                                                                "Cell_Count": "8",
+                                                                "Cell_Area": "18.992",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "18.992",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "U_fld_crypto_eng_id",
+                                                                "Module": "reg_sw_rw_WIDTH4_RST_VAL0_1",
+                                                                "Cell_Count": "8",
+                                                                "Cell_Area": "18.992",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "18.992",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "U_fld_crypto_sel",
+                                                                "Module": "reg_sw_rw_WIDTH2_RST_VAL0_3",
+                                                                "Cell_Count": "6",
+                                                                "Cell_Area": "11.358",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "11.358",
+                                                                "Sublevel": []
+                                                            },
+                                                            {
+                                                                "Instance": "U_fld_src_ch_id",
+                                                                "Module": "reg_sw_rw_WIDTH5_RST_VAL0",
+                                                                "Cell_Count": "9",
+                                                                "Cell_Area": "22.716",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "22.716",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "Instance": "U_reg_CH_DESC_ADDR_HI_0",
+                                                        "Module": "reg_CH_DESC_ADDR_HI",
+                                                        "Cell_Count": "36",
+                                                        "Cell_Area": "123.264",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "123.264",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "U_fld_desc_base_addr_hi",
+                                                                "Module": "reg_sw_rw_WIDTH32_RST_VAL0",
+                                                                "Cell_Count": "36",
+                                                                "Cell_Area": "123.264",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "123.264",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "Instance": "U_reg_CH_DESC_ADDR_LO_0",
+                                                        "Module": "reg_CH_DESC_ADDR_LO",
+                                                        "Cell_Count": "36",
+                                                        "Cell_Area": "123.264",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "123.264",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "U_fld_desc_base_addr_lo",
+                                                                "Module": "reg_sw_rw_WIDTH32_RST_VAL0_4",
+                                                                "Cell_Count": "36",
+                                                                "Cell_Area": "123.264",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "123.264",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "Instance": "U_reg_CH_DST_ADDR_HI_0",
+                                                        "Module": "reg_CH_DST_ADDR_HI",
+                                                        "Cell_Count": "36",
+                                                        "Cell_Area": "123.264",
+                                                        "Net_Area": "0.000",
+                                                        "Total_Area": "123.264",
+                                                        "Sublevel": [
+                                                            {
+                                                                "Instance": "U_fld_dst_addr_hi",
+                                                                "Module": "reg_sw_rw_WIDTH32_RST_VAL0_2",
+                                                                "Cell_Count": "36",
+                                                                "Cell_Area": "123.264",
+                                                                "Net_Area": "0.000",
+                                                                "Total_Area": "123.264",
+                                                                "Sublevel": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

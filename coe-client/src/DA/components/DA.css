@@ -1,0 +1,397 @@
+/* ***********   RunsForm Start       ************** */
+    
+.runs-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 10px 10px 10px -6px rgba(0, 0, 0, 0.373);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+
+
+.form-title {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.label {
+  color: #333;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-submit,
+.btn-cancel {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.btn-submit {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.btn-submit:hover {
+  background-color: #45a049;
+}
+
+.btn-cancel {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  background-color: #d32f2f;
+}
+
+.inputTitle {
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+
+
+/* ***********   RunsForm End       ************** */
+
+/* ***********LoginForm Start**************** */
+
+.login-container {
+  display: flex;
+  
+  flex-direction: column;
+
+  align-items: center;
+
+  /* justify-content: center; */
+
+  height: 100vh;
+
+  background-color: #ecdedec7;
+
+  box-shadow: 0 0 10px rgba(53, 47, 47, 0.644);
+
+}
+
+.login-title {
+  text-align: center;
+
+  margin-top: 50px;
+
+  color: #4c4040;
+
+  font-size: 24px;
+}
+
+.login-form {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 300px;
+
+  padding: 20px;
+
+  border-radius: 5px;
+
+  background-color: #fff;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-input {
+  width: 100%;
+
+  padding: 10px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
+}
+
+.login-button {
+  background-color: #4caf50;
+
+  color: #fff;
+
+  border: none;
+
+  padding: 10px 20px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #45a049;
+}
+
+.login-error {
+  text-align: center;
+
+  color: red;
+
+  margin-top: 10px;
+}
+
+.forgotpassword{
+  background-color: #f13b51;
+
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* ***********LoginForm End**************** */
+
+/* ***********CheckList start**************** */
+
+
+.checklist-table {
+  width: 85%; /* Adjust the width as desired */
+  margin: 40px auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 10px 10px 10px  rgba(49, 48, 50, 0.94);
+}
+
+.checklist-table th{
+  border: 1px solid #e6dddd;
+  padding: 12px;
+}
+.checklist-table td {
+  border: 1px solid #ac6969;
+  padding: 12px;
+  text-align: left;
+  background-color: #e7ece0c4;
+  box-shadow: 0px 0px 5px rgba(12, 12, 12, 0.1);
+  font-family: "Arial Black", sans-serif; /* Set a stylish font */
+}
+
+.checklist-result table {
+  width: 80%; /* Adjust the width as desired */
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.checklist-result th,
+.checklist-result td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: left;
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 5px rgba(39, 177, 223, 0.1);
+  font-family: "Arial Black", sans-serif; /* Set a stylish font */
+}
+
+.checklist-table tr:hover {
+  box-shadow: 0px 0px 5px rgba(107, 220, 50, 0.91);
+}
+
+.checklist-table label {
+  margin-right: 10px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px; /* Adjust the top margin as needed */
+}
+
+.submit-button {
+  background-color: rgb(10, 115, 157);
+  color: white;
+  padding: 10px 20px; /* Adjust the padding as needed */
+  font-size: 18px; /* Adjust the font size as needed */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #00bfff; /* Darker shade of skyblue on hover */
+}
+
+
+.shaded-column {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.user-role {
+  text-align: left;
+  color: blue;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+
+
+
+/* ***********CheckList end**************** */
+
+/* ***********preSynthesisReport start**************** */
+.report-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.report-table th,
+.report-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.report-table th {
+  background-color: #0b0b0b;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.report-table tbody tr:hover {
+  background-color: #ebebeb;
+}
+
+.report-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: left;
+  background-color: #eceff2eb;
+  box-shadow: 10px 10px 5px  rgba(50, 49, 49, 0.64);
+  font-family: "Arial Black", sans-serif; /* Set a stylish font */
+}
+
+.report-table td:first-child {
+  border-left: 1px solid #000000;
+}
+
+.report-table td:last-child {
+  border-right: 1px solid #000000;
+}
+
+.report-table tbody tr:hover td {
+  background-color: #d4f4d4; /* Highlight with green color on hover */
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+ 
+}
+
+.left-buttons {
+  flex: 1;
+  text-align: left;
+ 
+}
+
+.right-buttons {
+  flex: 1;
+  text-align: right;
+}
+
+/* Add CSS for the percentage chart and label */
+/* CSS for the percentage chart */
+.percentage-chart {
+  position:left;
+  right: 10px; /* Adjust the top position as needed */
+  width: 70px; /* Adjust the width as needed */
+  height: 80px;  /* Adjust the right position as needed */
+}
+
+/* Green color for PD Dev percentage */
+.circular-progressbar.pd-dev .CircularProgressbar-path {
+  stroke: #05592e;
+}
+
+/* Blue color for PD Lead percentage */
+.circular-progressbar.pd-lead .CircularProgressbar-path {
+  stroke: #eb3663;
+}
+
+/* Default color if no percentage is available */
+.circular-progressbar.default .CircularProgressbar-path {
+  stroke: #060606;
+}
+
+/* Green color for PD Dev and text */
+.circular-progressbar.pd-dev .CircularProgressbar-text {
+  fill: #5AC38D;
+}
+
+/* Blue color for PD Lead and text */
+.circular-progressbar.pd-lead .CircularProgressbar-text {
+  fill: #36A2EB;
+}
+
+/* Default color for text if no percentage is available */
+.circular-progressbar.default .CircularProgressbar-text {
+  fill: #E3E3E3;
+}
+
+/* Adjust the size of the CircularProgressbar */
+.circular-progressbar {
+  width: 10px; /* Adjust the width as needed */
+  height: 10px; /* Adjust the height as needed */
+  background-color: #f13b51;
+}
+
+
+/* ***********preSynthesisReport end**************** */
