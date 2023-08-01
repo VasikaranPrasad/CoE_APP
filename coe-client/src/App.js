@@ -15,6 +15,8 @@ import PasswordReset from './DA/components/PasswordReset';
 import FlowTool from './DA/components/StageButtons';
 import PostChecklistPage from './DA/components/postChecklist';
 import PostSynthesisReport from './DA/components/postSynthesisReport';
+import TreeView from './DA/components/TreeView';
+import FilePath from './DA/components/Filepath';
 
 
 
@@ -38,6 +40,9 @@ const App = () => {
         <Route path='/flowtool' element={<FlowTool />} />
         <Route path='/postchecklist' element={<PostChecklistPage />} />
         <Route path='/postSynthesisReport' element={<PostSynthesisReport />} />
+        <Route path='/Treeview' element={<TreeView />} />
+        <Route path='/filepath' element={<FilePath />} />
+
 
       </Routes>
     </BrowserRouter>

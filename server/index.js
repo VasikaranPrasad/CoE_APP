@@ -1,20 +1,42 @@
+// const express = require('express');
+// const cors = require('cors');
+// const fs = require('fs');
+// const bodyParser = require('body-parser');
+// const mongoose = require('mongoose');
+// const DesignVariable = require('./modal/FM_model/DesignVariable');
+// const Design = require('./modal/FM_model/DesignModel');
+// const userRouter = require('./router/DA_router/userRouter');
+// const addrunRouter = require('./router/DA_router/AddRunRouter')
+// const landingRouter = require('./router/DD_router/LandingRouter')
+// // Vasi model
+// const addRunModel = require('./modal/DA_model/AddRunDetails')
+// const checklistRoutes = require('./router/DA_router/checklistRoutes')
+// const postChecklistRouter = require('./router/DA_router/postChecklistRouter')
+// const app = express();
+// const dotenv = require("dotenv").config();
+// const path = require("path");
+
+
+
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
+const yaml = require('yaml'); // Add the YAML library
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const DesignVariable = require('./modal/FM_model/DesignVariable');
 const Design = require('./modal/FM_model/DesignModel');
 const userRouter = require('./router/DA_router/userRouter');
-const addrunRouter = require('./router/DA_router/AddRunRouter')
-const landingRouter = require('./router/DD_router/LandingRouter')
-// Vasi model
-const addRunModel = require('./modal/DA_model/AddRunDetails')
-const checklistRoutes = require('./router/DA_router/checklistRoutes')
-const postChecklistRouter = require('./router/DA_router/postChecklistRouter')
+const addrunRouter = require('./router/DA_router/AddRunRouter');
+const landingRouter = require('./router/DD_router/LandingRouter');
+const addRunModel = require('./modal/DA_model/AddRunDetails');
+const checklistRoutes = require('./router/DA_router/checklistRoutes');
+const postChecklistRouter = require('./router/DA_router/postChecklistRouter');
 const app = express();
 const dotenv = require("dotenv").config();
-const path = require("path")
+const path = require("path");
+
+
 
 const port = process.env.PORT;
 
@@ -187,6 +209,85 @@ app.get('/fetch-data/:runId', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+// New route to process the file path from the frontend
+app.post('/process-file', (req, res) => {
+  const { filePath } = req.body;
+
+  // Configuration for the SSH connection
+  const sshConfig = {
+    host: '172.16.90.3',
+    port: 22,
+    username: 'vasikaran',
+    password: 'Vasikaran@123', // Or use privateKey, if applicable
+  };
+
+  // Create a new SSH client
+  const { Client } = require('ssh2');
+  const sshClient = new Client();
+
+  // Connect to the Linux server via SSH
+  sshClient.connect(sshConfig);
+
+  sshClient.on('ready', () => {
+    console.log('SSH connection established.');
+
+    // Fetch the file from the Linux server
+    sshClient.sftp((err, sftp) => {
+      if (err) {
+        console.error('Error occurred during SFTP:', err);
+        sshClient.end(); // Close the SSH connection
+        res.status(500).json({ error: 'Error occurred during SFTP' });
+        return;
+      }
+
+      // Fetch the file contents
+      sftp.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error occurred while reading the file:', err);
+          sshClient.end(); // Close the SSH connection
+          res.status(500).json({ error: 'Error occurred while reading the file' });
+          return;
+        }
+
+        // Remove comments from the YAML data
+        const cleanedData = data.replace(/#.*/g, '');
+
+        // Parse the cleaned YAML data to a JavaScript object
+        const yamlData = yaml.parse(cleanedData);
+
+        // Convert the JavaScript object to JSON
+        const jsonString = JSON.stringify(yamlData, null, 2);
+
+        // Write the JSON string to a new JSON file
+        const outputPath = '../coe-client/src/DA/components/output2.json';
+        fs.writeFileSync(outputPath, jsonString, 'utf8');
+
+        console.log('YAML to JSON conversion is complete. The JSON data has been saved to output.json.');
+
+        // Close the SSH connection after the file is fetched and processed
+        sshClient.end();
+
+        res.json({ message: 'YAML to JSON conversion is complete. The JSON data has been saved to output.json.' });
+      });
+    });
+  });
+
+  // Handle errors during the SSH connection
+  sshClient.on('error', (err) => {
+    console.error('Error occurred during SSH connection:', err);
+    sshClient.end(); // Close the SSH connection
+    res.status(500).json({ error: 'Error occurred during SSH connection' });
+  });
+
+  // Handle SSH connection close
+  sshClient.on('close', () => {
+    console.log('SSH connection closed.');
+  });
+});
+
+
 
 
 // Start the server

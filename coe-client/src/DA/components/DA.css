@@ -395,3 +395,21 @@
 
 
 /* ***********preSynthesisReport end**************** */
+
+
+
+
+/* DA.css */
+.main-stage {
+  background-color: darkgreen;
+  color: white;
+}
+
+.sub-stage {
+  background-color: lightgreen;
+  color: black;
+}
+
+.selected {
+  font-weight: bold;
+}
