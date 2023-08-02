@@ -261,7 +261,7 @@ app.post('/process-file', (req, res) => {
         const jsonString = JSON.stringify(yamlData, null, 2);
 
         // Write the JSON string to a new JSON file
-        const outputPath = '../coe-client/src/DA/components/output3.json';
+        const outputPath = '../coe-client/src/DA/components/output5.json';
         fs.writeFileSync(outputPath, jsonString, 'utf8');
 
         console.log('YAML to JSON conversion is complete. The JSON data has been saved to output.json.');
