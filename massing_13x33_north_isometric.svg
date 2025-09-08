@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="640" viewBox="0 0 560 640">
+  <!-- Simple 3D Isometric Massing: 13' x 33' plot; Ground (1BHK+parking), First (2BHK+balcony) -->
+  <!-- Isometric projection with 30° axes. Units scaled at ~6 px/ft for compactness. -->
+  <defs>
+    <style>
+      .title { font: 16px sans-serif; font-weight: 700; fill: #111; }
+      .label { font: 12px sans-serif; fill: #333; }
+      .edge { stroke: #333; stroke-width: 1.2; fill: none; }
+      .top-upper { fill: #e8e8e8; stroke: #333; stroke-width: 1; }
+      .face-n-upper { fill: #cfcfcf; stroke: #333; stroke-width: 1; }
+      .face-e-upper { fill: #dcdcdc; stroke: #333; stroke-width: 1; }
+      .top-lower { fill: #d6d6d6; stroke: #333; stroke-width: 1; }
+      .face-n-lower { fill: #bdbdbd; stroke: #333; stroke-width: 1; }
+      .face-e-lower { fill: #c7c7c7; stroke: #333; stroke-width: 1; }
+      .stair-top { fill: #ececff; stroke: #4a4a73; stroke-width: 1; }
+      .stair-face { fill: #d9daf3; stroke: #4a4a73; stroke-width: 1; }
+      .balcony-top { fill: #f2e6d9; stroke: #9c6e3f; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <text x="280" y="28" text-anchor="middle" class="title">3D Isometric Massing - 13' x 33' (North up)</text>
+
+  <!-- North arrow -->
+  <g transform="translate(480,40)">
+    <polygon points="0,0 8,16 -8,16" fill="#111"/>
+    <text x="0" y="32" text-anchor="middle" class="label">N</text>
+  </g>
+
+  <!-- Upper block (First floor): width 13', depth 33', height 10' (z: 60-120) -->
+  <!-- North face (y=33') -->
+  <polygon class="face-n-upper" points="48.53,499 116.08,538 116.08,598 48.53,559"/>
+  <!-- East face (x=13') -->
+  <polygon class="face-e-upper" points="287.55,439 116.08,538 116.08,598 287.55,499"/>
+  <!-- Top face (roof) z=120 -->
+  <polygon class="top-upper" points="220,400 287.55,439 116.08,538 48.53,499"/>
+
+  <!-- Lower block (Ground built area behind parking): width 13', depth 19', height 10' (z: 0-60, y: 0-19') -->
+  <!-- North face (y=19') -->
+  <polygon class="face-n-lower" points="121.28,517 188.82,556 188.82,616 121.28,577"/>
+  <!-- East face (x=13') -->
+  <polygon class="face-e-lower" points="287.55,499 188.82,556 188.82,616 287.55,559"/>
+  <!-- Top face (slab over ground) z=60 -->
+  <polygon class="top-lower" points="220,460 287.55,499 188.82,556 121.28,517"/>
+
+  <!-- Stair shaft along west (x: 0-3', depth full, height full) -->
+  <!-- East face of stair (x=3') -->
+  <polygon class="stair-face" points="235.59,409 64.12,508 64.12,628 235.59,529"/>
+  <!-- Top of stair (z=120) -->
+  <polygon class="stair-top" points="220,400 235.59,409 64.12,508 48.53,499"/>
+
+  <!-- Balcony slab on first floor (front/north) ~4' deep -->
+  <polygon class="balcony-top" points="48.53,493 116.08,532 136.86,580 69.32,541"/>
+
+  <!-- Ground hint line (parking recess) -->
+  <line class="edge" x1="121.28" y1="577" x2="48.53" y2="559"/>
+
+  <!-- Labels -->
+  <text x="300" y="250" class="label">First floor mass</text>
+  <text x="310" y="545" class="label">Ground built (behind parking)</text>
+  <text x="100" y="590" class="label">Parking (open)</text>
+  <text x="110" y="480" class="label">Stair shaft</text>
+  <text x="120" y="520" class="label">Balcony</text>
+</svg>
+
