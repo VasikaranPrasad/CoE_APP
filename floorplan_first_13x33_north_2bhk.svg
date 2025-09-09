@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="720" viewBox="0 0 320 720">
+  <!-- Scale: 1 ft = 20 px; Plot: 13' x 33' => 260 x 660 px; 20 px margin -->
+  <defs>
+    <style>
+      .outline { fill: none; stroke: #111; stroke-width: 2; }
+      .wall { fill: none; stroke: #111; stroke-width: 3; }
+      .label { font: 12px sans-serif; fill: #111; }
+      .title { font: 14px sans-serif; font-weight: bold; fill: #111; }
+    </style>
+  </defs>
+
+  <!-- Border and title -->
+  <rect x="10" y="10" width="300" height="700" class="outline"/>
+  <text x="160" y="28" text-anchor="middle" class="title">First Floor - 2BHK (13' x 33', North up)</text>
+
+  <!-- Plot boundary -->
+  <rect x="30" y="30" width="260" height="660" class="wall"/>
+
+  <!-- North arrow -->
+  <polygon points="290,36 296,48 284,48" fill="#111"/>
+  <text x="290" y="62" text-anchor="middle" class="label">N</text>
+
+  <!-- Balcony 4' deep (front) -->
+  <rect x="30" y="30" width="260" height="80" fill="#e7f3ff" stroke="#111"/>
+  <text x="160" y="72" text-anchor="middle" class="label">Balcony 13' x 4'</text>
+
+  <!-- Stair arrival (NW corner over parking) & small lobby -->
+  <rect x="30" y="110" width="60" height="200" fill="#d9d9d9" stroke="#111"/>
+  <text x="60" y="210" text-anchor="middle" class="label" transform="rotate(-90 60,210)">Stair / Lobby</text>
+
+  <!-- Living/Dining 10' deep -->
+  <rect x="30" y="110" width="260" height="200" fill="#ffe7cd" stroke="#111" opacity="0.7"/>
+  <text x="190" y="210" text-anchor="middle" class="label">Living / Dining 13' x 10'</text>
+
+  <!-- Kitchen (SE corner of living) 7' x 8' -->
+  <rect x="150" y="150" width="140" height="160" fill="#fff1e0" stroke="#b36b00"/>
+  <text x="220" y="230" text-anchor="middle" class="label">Kitchen 7' x 8'</text>
+
+  <!-- Corridor along west (3' wide) connecting to rear rooms -->
+  <rect x="30" y="310" width="60" height="380" fill="#f0f0f0" stroke="#999"/>
+  <text x="60" y="500" text-anchor="middle" class="label" transform="rotate(-90 60,500)">Corridor 3' wide</text>
+
+  <!-- Bedroom 1 (middle) 10' deep x 10' wide -->
+  <rect x="90" y="310" width="200" height="200" fill="#e9f0ff" stroke="#1b3aa5"/>
+  <text x="190" y="410" text-anchor="middle" class="label">Bedroom 1 10' x 10'</text>
+
+  <!-- Bedroom 2 (rear) 9' deep x 10' wide -->
+  <rect x="90" y="510" width="200" height="180" fill="#dde7ff" stroke="#1b3aa5"/>
+  <text x="190" y="600" text-anchor="middle" class="label">Bedroom 2 10' x 9'</text>
+
+  <!-- Common Bath near stair (schematic) 4' x 6' -->
+  <rect x="30" y="310" width="60" height="120" fill="#e0f7f1" stroke="#0b6b53" opacity="0.9"/>
+  <text x="60" y="370" text-anchor="middle" class="label" transform="rotate(-90 60,370)">Bath 4' x 6'</text>
+
+  <!-- Notes -->
+  <text x="160" y="702" text-anchor="middle" class="label">Schematic layout; adjust walls/doors/windows to suit site/services.</text>
+</svg>
+
