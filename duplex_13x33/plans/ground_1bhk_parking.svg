@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="374" height="814" viewBox="0 0 374 814">
+<style> .plot{fill:none;stroke:#111;stroke-width:2} .room{fill:none;stroke:#444;stroke-width:1.6} .label{font: 14px/1.2 sans-serif; fill:#111} .dim{font: 12px monospace; fill:#555} .door{stroke:#0a7;stroke-width:3} .north{font: bold 14px sans-serif} .zone{fill:none;stroke:#999;stroke-dasharray:5 4} </style>
+<rect x="44.0" y="44.0" width="286.0" height="726.0" class="plot" />
+
+<text x="187.0" y="61.6" class="north" text-anchor="middle">NORTH (Road)</text>
+
+<rect x="44.0" y="44.0" width="286.0" height="308.0" class="room" />
+
+<text x="50.6" y="63.8" class="dim" text-anchor="start">Parking 13' x 14'</text>
+
+<rect x="44.0" y="352.0" width="220.0" height="198.0" class="room" />
+
+<text x="50.6" y="369.6" class="dim" text-anchor="start">Living + Open Kitchen ~10' x 9'</text>
+
+<rect x="264.0" y="352.0" width="66.0" height="198.0" class="room" />
+
+<text x="266.2" y="367.4" class="dim" text-anchor="start">Stair 3' x 9'</text>
+
+<rect x="55.0" y="429.0" width="154.0" height="110.0" class="zone" />
+
+<text x="57.2" y="444.4" class="dim" text-anchor="start">Kitchen zone ~7' x 5'</text>
+
+<rect x="154.0" y="418.0" width="110.0" height="132.0" class="room" />
+
+<text x="156.2" y="433.4" class="dim" text-anchor="start">Bath 5' x 6'</text>
+
+<rect x="44.0" y="550.0" width="286.0" height="220.0" class="room" />
+
+<text x="50.6" y="567.6" class="dim" text-anchor="start">Bedroom 13' x 10'</text>
+
+<line x1="121.0" y1="44.0" x2="193.6" y2="44.0" class="door"/>
+<line x1="66.0" y1="550.0" x2="132.0" y2="550.0" class="door"/>
+</svg>
