@@ -1,0 +1,1 @@
+{\n  "plot": { "width_ft": 13, "depth_ft": 33, "north_on_width": true },\n  "setbacks_ft": { "front": 0, "rear": 0, "left": 0.5, "right": 0.5 },\n  "standards": { "ft_per_unit": 1, "stair_width_ft": 3, "parking": { "width_ft": 8, "length_ft": 15 } }\n}
